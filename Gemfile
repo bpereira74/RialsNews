@@ -74,3 +74,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "annotate", "~> 3.2"
+
+gem "minitest", "~> 5.18"
