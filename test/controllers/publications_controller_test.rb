@@ -1,11 +1,6 @@
 require "test_helper"
 
 class PublicationsControllerTest < ActionDispatch::IntegrationTest
-include Devise::Test::IntegrationHelpers
-setup do
-@publication = publications(:one)
-end
-end
 
 test "should create publication" do
 assert_difference("Publication.count") do
