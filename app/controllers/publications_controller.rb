@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[ show edit update destroy ]
-  before_action :autenticate_user!,except[:index,:show]
+  before_action :authenticate_user!, except: [:index, :show]
   # GET /publications or /publications.json
   def index
     @publications = Publication.all
@@ -22,7 +22,7 @@ class PublicationsController < ApplicationController
   # POST /publications or /publications.json
   def create
     @publication = Publication.new(publication_params)
-
+    @post.user = current_user  
     respond_to do |format|
       if @publication.save
         format.html { redirect_to publication_url(@publication), notice: "Publication was successfully created." }
