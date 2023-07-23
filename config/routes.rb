@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :publications, except: [:index]
   devise_for :users
   get 'home/index'
