@@ -18,4 +18,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
       has_many:publications
       enum :role, %i[:normal_user, :author, :admin]
+
+      #validaciones      
+      validates :email,  presence:true,
+      uniqueness:true 
+      validates :password, presence:true,
 end
