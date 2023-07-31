@@ -1,6 +1,6 @@
-#Título del Proyecto Crazy4cats Pagina en Heroku https://radiant-tor-21831-dc0ae60f6dd3.herokuapp.com/users/sign_in
+#Título del Proyecto RialsNews Pagina en Heroku https://salty-plains-16313-40dd89f58c31.herokuapp.com/
 
-Descripción Este proyecto es un avance de mi aprendizaje en Ruby on Rails, consiste en el desarrollo de un proyecto sobre publicaciones ralacionadas a gatos
+Descripción Este proyecto es un avance de mi aprendizaje en Ruby on Rails, consiste en el desarrollo de un proyecto sobre publicaciones relacionadas a actualidad
 
 Insignias puede observar el resultado de la aplicación , subida a Heroku, etc.
 
