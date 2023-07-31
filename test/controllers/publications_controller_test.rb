@@ -21,5 +21,7 @@ sign_in users(:one)
 assert_difference("Publication.count", -1) do
 delete post_url(@publication)
 end
+
 assert_redirected_to publications_url
+end
 end

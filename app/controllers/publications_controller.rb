@@ -1,17 +1,16 @@
-require "test_helper"
-
 class PublicationsController < ApplicationController
   before_action :set_publication, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action only: [:new, :create] do
+  before_action :set_publication, only: %i[:new, :create] do
       authorize_request(["author", "admin"])
-  before_action only: [:edit, :update, :destroy] do
+  before_action :onlyset_publication, only: %i[:edit, :update, :destroy] do
       authorize_request(["admin"])
-               
+  end
+end
 
   # GET /publications or /publications.json
   def index
-    @publications = Publication.all
+    @publication = Publication.all
   end
 
   # GET /publications/1 or /publications/1.json
@@ -20,7 +19,8 @@ class PublicationsController < ApplicationController
 
   # GET /publications/new
   def new
-    @publication = Publication.new
+      @publication = Publication.new
+      @publication = current_user.publications.build
   end
 
   # GET /publications/1/edit
@@ -29,22 +29,21 @@ class PublicationsController < ApplicationController
 
   # POST /publications or /publications.json
   def create
-    @publication = Publication.new(publication_params)
-    @publication.user = current_user  
-    respond_to do |format|
-      if @publication.save
-        format.html { redirect_to publication_url(@publication), notice: "Publication was successfully created." }
-        format.json { render :show, status: :created, location: @publication }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @publication.errors, status: :unprocessable_entity }
+      @publication = Publication.new(publication_params)
+      respond_to do |format|
+        if @publication.save
+          format.html { redirect_to publication_url(@publication), notice: "Publication was successfully created." }
+          format.json { render :show, status: :created, location: @publication }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @publication.errors, status: :unprocessable_entity }
+        end
       end
     end
-  end
-
+end
   # PATCH/PUT /publications/1 or /publications/1.json
-  def update
-    respond_to do |format|
+      def update
+            respond_to do |format|
       if @publication.update(publication_params)
         format.html { redirect_to publication_url(@publication), notice: "Publication was successfully updated." }
         format.json { render :show, status: :ok, location: @publication }
@@ -52,20 +51,17 @@ class PublicationsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @publication.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
+     end
   # DELETE /publications/1 or /publications/1.json
   def destroy
     @publication.destroy
-
     respond_to do |format|
       format.html { redirect_to publications_url, notice: "Publication was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
-  private
+      private
     # Use callbacks to share common setup or constraints between actions.
     def set_publication
       @publication = Publication.find(params[:id])
